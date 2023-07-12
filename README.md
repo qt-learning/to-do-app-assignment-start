@@ -5,5 +5,6 @@
 	• Download the updated To-Do app project from the link below if you have not already got it.
 	• Open the project in Qt Creator.
 	• Experiment with adapting the user interface and adding a timer to a "toDoItem".
-	• The timer can simply just display the amount of seconds passed since the task has been added and stops when the item is ticked. Or if you are feeling adventurous, you can design some functionality that you would like to see in a To-Do application!
-	• Be sure to think about usability and refer back to the previous courses if you need to refresh your memory.
+	• The timer can simply just display the number of seconds that have passed since the task has been added and stops when the item is ticked. 
+ 	   Or, if you are feeling adventurous, you can design some functionality that you would like to see in a To-Do application!
+	• Be sure to think about usability and refer to the previous courses if you need to refresh your memory.
