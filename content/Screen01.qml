@@ -18,6 +18,7 @@ Rectangle {
     color: Constants.backgroundColor
     property bool isDialogOpen: false
 
+
     Text {
         id: text1
         text: qsTr("To Do")
@@ -137,7 +138,7 @@ Rectangle {
                     name: "My To Do"
                 }
                 function createListElement() {
-                       return {
+                    return {
                         "name": toDoTextInput.text
                     }
                 }
@@ -155,6 +156,7 @@ Rectangle {
                 CheckBox {
                     id: checkBox
                     text: name
+                    property bool completed: false
                     anchors.left: parent.left
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
@@ -162,6 +164,55 @@ Rectangle {
                     anchors.leftMargin: 0
                     anchors.bottomMargin: 0
                     anchors.topMargin: 0
+
+                    Connections {
+                        target: checkBox
+                        onClicked: checkBox.completed = true
+                    }
+                }
+
+
+                Item  {
+                    id: root
+
+                    property double startTime: 0
+                    property int secondsElapsed: 0
+                    width: 200
+                    height: 230
+
+                    function restartCounter()  {
+
+                        root.startTime = 0;
+
+                    }
+
+                    function timeChanged()  {
+                        if(root.startTime==0)
+                        {
+                            root.startTime = new Date().getTime(); //returns the number of milliseconds since the epoch (1970-01-01T00:00:00Z);
+                        }
+                        var currentTime = new Date().getTime();
+                        root.secondsElapsed = (currentTime-startTime)/1000;
+
+                    }
+
+                    Timer  {
+                        id: elapsedTimer
+                        interval: 500;
+                        running: !checkBox.completed;
+                        repeat: true;
+                        onTriggered: root.timeChanged()
+                    }
+                }
+
+                Text {
+                    id: counterText
+                    text: root.secondsElapsed
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.right: parent.right
+                    horizontalAlignment: Text.AlignRight
+                    font.pointSize: 22
+                    anchors.rightMargin: 50
                 }
             }
         }
